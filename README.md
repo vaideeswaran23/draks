@@ -1,4 +1,4 @@
 # draks
 
 Explore Draggable Tasks
-Prioratize, Rearrange and DO
+Prioritize, Rearrange and DO
