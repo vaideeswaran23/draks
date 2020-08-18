@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles.css";
+import "./App.sass";
 
 export default function App() {
   return (
@@ -7,6 +8,7 @@ export default function App() {
       <h1>Hello CodeSandbox LOL!!!</h1>
       <h2>Better to add in git. Start editing to see some magic happen!</h2>
       <p>Waste: Your browser is not supporting HTML5</p>
+      <button className="button">LOL</button>
     </div>
   );
 }
