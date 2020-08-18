@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./routes/main";
 import NavBar from "./components/NavBar"
 
-import "./App.sass";
+import "./styles/App.sass";
 
 export default function Button() {
   return (
