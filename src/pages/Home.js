@@ -1,166 +1,78 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import Board from "../components/Board";
+import { DragDropContext } from "react-beautiful-dnd";
+import initialData from "./../data/data";
 
 function Home(props) {
+  const [isSearch, setIsSearch] = useState(false);
+  const [data, setData] = useState(initialData);
 
-    const [isSearch, setIsSearch] = useState(false)
+  const handleSearch = () => {
+    setIsSearch(true);
+    setTimeout(() => setIsSearch(false), 1000);
+  };
 
-
-
-    const handleSearch = () => {
-        setIsSearch(true)
-        setTimeout(() => setIsSearch(false), 1000)
+  const onDragEnd = (result) => {
+    const { destination, source, draggableId } = result;
+    if (!destination) {
+      return;
     }
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    const board = data.boards[source.droppableId];
+    const newTileIds = Array.from(board.tileIds);
+    newTileIds.splice(source.index, 1);
+    newTileIds.splice(destination.index, 0, draggableId);
 
-    return (
-        <>
-        <section class="hero is-primary">
-            <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    DRAKS
-                </h1>
-                <div class={`control is-medium ${ isSearch ? 'is-loading': ''}`}>
-                    <input class="input is-medium" type="text" placeholder="Search your draks" onChange={handleSearch}/>
-                </div>
+    const newBoard = {
+      ...board,
+      tileIds: newTileIds,
+    };
+
+    const newState = {
+      ...data,
+      boards: {
+        ...data.boards,
+        [newBoard.id]: newBoard,
+      },
+    };
+    setData(newState);
+  };
+
+  return (
+    <>
+      <section className="hero is-primary">
+        <div className="hero-body">
+          <div className="container">
+            <h1 className="title">DRAKS</h1>
+            <div
+              className={`control is-medium ${isSearch ? "is-loading" : ""}`}>
+              <input
+                className="input is-medium"
+                type="text"
+                placeholder="Search your draks"
+                onChange={handleSearch}
+              />
             </div>
-            </div>
-        </section>
-        <div class="container is-fullhd mt-5">
-        <div class="tile is-ancestor">
-            <div class="tile is-vertical is-8">
-                <div class="tile">
-                <div class="tile is-parent is-vertical">
-                    <article class="tile is-child notification is-link">
-                    <p class="title is-size-4">Vertical...</p>
-                    <p class="subtitle">Top tile</p>
-                    </article>
-                    <article class="tile is-child notification is-warning">
-                    <p class="title is-size-4">...tiles</p>
-                    <p class="subtitle">Bottom tile</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child notification is-info">
-                    <p class="title is-size-4">Middle tile</p>
-                    <p class="subtitle">With an image</p>
-                    <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/640x480.png"/>
-                    </figure>
-                    </article>
-                </div>
-                </div>
-                <div class="tile is-parent">
-                <article class="tile is-child notification is-danger">
-                    <p class="title is-size-4">Wide tile</p>
-                    <p class="subtitle">Aligned with the right tile</p>
-                    <div class="content">
-                    </div>
-                </article>
-                </div>
-            </div>
-            <div class="tile is-parent">
-                <article class="tile is-child notification is-success">
-                <div class="content">
-                    <p class="title is-size-4">Tall tile</p>
-                    <p class="subtitle">With even more content</p>
-                    <div class="content">
-                    </div>
-                </div>
-                </article>
-            </div>
-            
-            </div>
-            <div class="tile is-ancestor">
-            <div class="tile is-vertical is-8">
-                <div class="tile">
-                <div class="tile is-parent is-vertical">
-                    <article class="tile is-child notification is-link">
-                    <p class="title is-size-4">Vertical...</p>
-                    <p class="subtitle">Top tile</p>
-                    </article>
-                    <article class="tile is-child notification is-warning">
-                    <p class="title is-size-4">...tiles</p>
-                    <p class="subtitle">Bottom tile</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child notification is-info">
-                    <p class="title is-size-4">Middle tile</p>
-                    <p class="subtitle">With an image</p>
-                    <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/640x480.png"/>
-                    </figure>
-                    </article>
-                </div>
-                </div>
-                <div class="tile is-parent">
-                <article class="tile is-child notification is-danger">
-                    <p class="title is-size-4">Wide tile</p>
-                    <p class="subtitle">Aligned with the right tile</p>
-                    <div class="content">
-                    </div>
-                </article>
-                </div>
-            </div>
-            <div class="tile is-parent">
-                <article class="tile is-child notification is-success">
-                <div class="content">
-                    <p class="title is-size-4">Tall tile</p>
-                    <p class="subtitle">With even more content</p>
-                    <div class="content">
-                    </div>
-                </div>
-                </article>
-            </div>
-            
-            </div>
-            <div class="tile is-ancestor">
-            <div class="tile is-vertical is-8">
-                <div class="tile">
-                <div class="tile is-parent is-vertical">
-                    <article class="tile is-child notification is-link">
-                    <p class="title is-size-4">Vertical...</p>
-                    <p class="subtitle">Top tile</p>
-                    </article>
-                    <article class="tile is-child notification is-warning">
-                    <p class="title is-size-4">...tiles</p>
-                    <p class="subtitle">Bottom tile</p>
-                    </article>
-                </div>
-                <div class="tile is-parent">
-                    <article class="tile is-child notification is-info">
-                    <p class="title is-size-4">Middle tile</p>
-                    <p class="subtitle">With an image</p>
-                    <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/640x480.png"/>
-                    </figure>
-                    </article>
-                </div>
-                </div>
-                <div class="tile is-parent">
-                <article class="tile is-child notification is-danger">
-                    <p class="title is-size-4">Wide tile</p>
-                    <p class="subtitle">Aligned with the right tile</p>
-                    <div class="content">
-                    </div>
-                </article>
-                </div>
-            </div>
-            <div class="tile is-parent">
-                <article class="tile is-child notification is-success">
-                <div class="content">
-                    <p class="title is-size-4">Tall tile</p>
-                    <p class="subtitle">With even more content</p>
-                    <div class="content">
-                    </div>
-                </div>
-                </article>
-            </div>
-            
-            </div>
+          </div>
         </div>
-        </>
-    )
+      </section>
+      <div className="container is-fullhd mt-5">
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Board
+            boards={data.boards["board-1"]}
+            tiles={data.boards["board-1"].tileIds.map(
+              (boardId) => data.tiles[boardId]
+            )}
+          />
+        </DragDropContext>
+      </div>
+    </>
+  );
 }
 
-export default Home
+export default Home;

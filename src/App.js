@@ -1,8 +1,8 @@
-import React from "react"
-import { BrowserRouter } from "react-router-dom"
-import { RecoilRoot } from "recoil"
-import Routes from "./routes/main"
-import NavBar from "./components/NavBar"
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import Routes from "./routes/main";
+import NavBar from "./components/NavBar";
 
 import "./styles/App.sass";
 
