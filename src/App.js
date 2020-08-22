@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter as BrowserRouter } from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
 import { RecoilRoot } from "recoil"
 import Routes from "./routes/main"
 import NavBar from "./components/NavBar"

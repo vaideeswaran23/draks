@@ -14,7 +14,7 @@ function Profile(props) {
           <div className="columns level">
             <div className="column align-right-and-centered">
               <figure class="image is-128x128">
-                <img className="is-rounded" src="https://bulma.io/images/placeholders/256x256.png" alt="Image" />
+                <img className="is-rounded" src="https://bulma.io/images/placeholders/256x256.png" alt="ProfilePic" />
               </figure>
             </div>
             <div className="column align-left-and-centered">
